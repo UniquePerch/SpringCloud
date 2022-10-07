@@ -1,0 +1,38 @@
+server:
+  port: 8201
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springcloud
+    username: root
+    password: lyh701721
+  application:
+    name: borrowservice
+  cloud:
+    nacos:
+      discovery:
+        # 配置Nacos注册中心地址
+        server-addr: localhost:8848
+        ephemeral: true
+#        cluster-name: Hangzhou
+#        namespace: 3586b89d-85c2-40c0-bcd0-7666edbf9a02
+    loadbalancer:
+      nacos:
+        enabled: true #启用集群内部负载均衡，优先调用同一个集群
+seata:
+  # 注册
+  registry:
+    # 使用Nacos
+    type: nacos
+    nacos:
+      # 使用Seata的命名空间，这样才能正确找到Seata服务，由于组使用的是SEATA_GROUP，配置默认值就是，就不用配了
+      namespace:  bf7fd11b-8c4c-452f-866a-b60753386c3e
+      username: nacos
+      password: nacos
+  # 配置
+  config:
+    type: nacos
+    nacos:
+      namespace:  bf7fd11b-8c4c-452f-866a-b60753386c3e
+      username: nacos
+      password: nacos
