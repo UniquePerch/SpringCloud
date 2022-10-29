@@ -1,0 +1,22 @@
+server:
+  port: 8201
+spring:
+  application:
+    name: borrowservice
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springcloud
+    username: root
+    password: lyh701721
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: willow
+
+feign:
+  oauth2:
+    #开启Oauth支持，这样就会在请求头中携带Token了
+    enabled: true
+    #同时开启负载均衡支持
+    load-balanced: true
