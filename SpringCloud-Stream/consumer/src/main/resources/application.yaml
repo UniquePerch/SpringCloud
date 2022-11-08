@@ -1,0 +1,19 @@
+server:
+  port: 8002
+spring:
+  cloud:
+    stream:
+      binders:   #此处配置要绑定的rabbitmq的服务信息
+        local-server: #绑定名称，随便起一个就行
+          type: rabbit #消息组件类型，这里使用的是RabbitMQ，就填写rabbit
+          environment:  #服务器相关信息，按照下面的方式填写就行，爆红别管
+            spring:
+              rabbitmq:
+                host: 47.99.66.125
+                port: 5672
+                username: willow
+                password: willow
+                virtual-host: /test
+      bindings:
+        test-in-0:
+          destination: test.exchange

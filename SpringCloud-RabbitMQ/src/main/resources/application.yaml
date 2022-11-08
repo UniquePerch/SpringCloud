@@ -1,0 +1,6 @@
+spring:
+  rabbitmq:
+    addresses: 47.99.66.125
+    username: willow
+    password: willow
+    virtual-host: /test
