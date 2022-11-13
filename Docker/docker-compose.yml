@@ -1,0 +1,26 @@
+version: "3.9"  #首先是版本号，别乱写，这个是和Docker版本有对应的
+services:   #services里面就是我们所有需要进行编排的服务了
+  spring:   #服务名称，随便起
+    container_name: app_springboot  #一会要创建的容器名称
+    restart: always
+    depends_on: #进程创建后再执行
+      - mysql
+      - redis
+    build: .
+    ports:
+      - "8080:8080"
+  mysql:
+    container_name: app_mysql
+    image: mysql/mysql-server:latest
+    environment: #这里我们通过环境变量配置MySQL的root账号和密码
+      MYSQL_ROOT_HOST: '%'   #登陆的主机，这里直接配置为'%'
+      MYSQL_ROOT_PASSWORD: 'lyh701721'    #MySQL root账号的密码，别设定得太简单了
+      MYSQL_DATABASE: 'study'    #在启动时自动创建的数据库
+      TZ: 'Asia/Shanghai'    #时区
+    ports:
+      - "3306:3306"    #把端口暴露出来，当然也可以不暴露，因为默认所有容器使用的是同一个网络
+  redis:
+    container_name: app_redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
